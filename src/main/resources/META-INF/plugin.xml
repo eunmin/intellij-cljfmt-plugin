@@ -4,7 +4,7 @@
     <vendor email="telepopsound@gmail.com" url="http://eunmin.kim">Eunmin Kim</vendor>
 
     <description><![CDATA[
-    cljfmt
+    cljfmt(<a href="https://github.com/weavejester/cljfmt">https://github.com/weavejester/cljfmt</a>)
     ]]></description>
 
     <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html

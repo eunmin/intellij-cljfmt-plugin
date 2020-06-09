@@ -10,9 +10,22 @@ import com.intellij.plugin.cljfmt.repl.ReplClient;
 import com.intellij.plugin.cljfmt.state.AppSettingsState;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.codeStyle.CodeStyleManager;
+import org.apache.commons.lang.StringEscapeUtils;
 import org.jetbrains.annotations.NotNull;
 
 public class ReformatAction extends AnAction {
+
+    private String escapeCode(String code) {
+        String text = code;
+        text = text.replace("\\", "\\\\");
+        return text.replace("\"", "\\\"");
+    }
+
+    private String unescapeCode(String code) {
+        String text = code;
+        text = text.substring(1, text.length() - 1);
+        return StringEscapeUtils.unescapeJava(text);
+    }
 
     public void reformat(Project project,  Editor editor) {
         AppSettingsState settings = AppSettingsState.getInstance();
@@ -22,23 +35,17 @@ public class ReformatAction extends AnAction {
             repl.connect();
 
             String text = editor.getDocument().getText();
-            text = text.replace("\"", "\\\"");
-            String code = String.format("(do (require 'cljfmt.core) (cljfmt.core/reformat-string \"%s\"))", text);
+            String code = String.format("(do (require 'cljfmt.core) (cljfmt.core/reformat-string \"%s\"))", escapeCode(text));
+            String result = repl.eval(code);
 
-            String reformatted = repl.eval(code);
-
-            reformatted = reformatted.substring(1, reformatted.length() - 1);
-            reformatted = reformatted.replace("\\\"", "\"");
-            final String reformattedCode = reformatted.replace("\\n", "\n");
-
-            WriteCommandAction.runWriteCommandAction(project, () -> editor.getDocument().setText(reformattedCode));
+            WriteCommandAction.runWriteCommandAction(project, () -> editor.getDocument().setText(unescapeCode(result)));
         } catch (ReplConnectionException e) {
             new ErrorsNotifier().notify(e.getMessage());
         } catch (Exception e) {
             if (e.getMessage() != null) {
                 new ErrorsNotifier().notify(e.getMessage());
             }
-            throw e;
+            e.printStackTrace();
         } finally {
             if (repl != null) repl.close();
         }
