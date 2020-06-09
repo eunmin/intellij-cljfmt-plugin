@@ -36,3 +36,6 @@ cljfmt(https://github.com/weavejester/cljfmt) plugin for IntelliJ.
 * Start your nREPL
 * `Tools > Reformat Code(cljfmt)`
 
+## TODO
+
+* Support cljfmt options
