@@ -15,7 +15,7 @@
         <applicationService serviceImplementation="com.intellij.plugin.cljfmt.state.AppSettingsState"/>
         <applicationConfigurable parentId="tools" instance="com.intellij.plugin.cljfmt.settings.AppSettingsConfigurable"
                                  id="org.intellij.sdk.settings.AppSettingsConfigurable"
-                                 displayName="SDK: Application Settings Example"/>
+                                 displayName="cljfmt"/>
     </extensions>
 
     <actions>
