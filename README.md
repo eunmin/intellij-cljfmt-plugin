@@ -13,7 +13,7 @@ cljfmt(https://github.com/weavejester/cljfmt) plugin for IntelliJ.
 ### Install plugin
 
 * Go to `Preferences > Plugins > Settings > Install Plugin from Disk ...`
-* Select plugin zip file(like this cljfmt-plugin-0.1.0-SNAPSHOT.zip) in build/distributions directory.
+* Select plugin zip file(like this cljfmt-plugin-0.1.0-SNAPSHOT.zip) in `build/distributions` directory.
 
 ### Configuration
 
