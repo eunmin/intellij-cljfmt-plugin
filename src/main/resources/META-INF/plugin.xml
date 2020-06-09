@@ -1,0 +1,27 @@
+<idea-plugin>
+    <id>org.example.cljfmt-plugin</id>
+    <name>cljfmt</name>
+    <vendor email="telepopsound@gmail.com" url="http://eunmin.kim">Eunmin Kim</vendor>
+
+    <description><![CDATA[
+    cljfmt
+    ]]></description>
+
+    <!-- please see https://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceImplementation="com.intellij.plugin.cljfmt.state.AppSettingsState"/>
+        <applicationConfigurable parentId="tools" instance="com.intellij.plugin.cljfmt.settings.AppSettingsConfigurable"
+                                 id="org.intellij.sdk.settings.AppSettingsConfigurable"
+                                 displayName="SDK: Application Settings Example"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action id="com.intellij.plugin.cljfmt.action.ReformatAction" class="com.intellij.plugin.cljfmt.action.ReformatAction" text="Reformat Code(cljfmt)">
+            <add-to-group group-id="ToolsMenu" anchor="last"/>
+        </action>
+    </actions>
+</idea-plugin>
